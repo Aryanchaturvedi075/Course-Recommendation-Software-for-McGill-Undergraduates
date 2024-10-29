@@ -1,0 +1,60 @@
+body {
+    box-sizing: border-box;
+    background-color: #ffe9b7dd;
+    font-size: 16px;
+    font-family:'Times New Roman', Times, serif;
+}
+
+button {
+    background-color: #f63737;
+    color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    padding: 5px 10px;
+    font-weight: 600;
+     cursor: pointer;
+}
+
+button:hover {
+    background-color: #db2121;
+}
+
+.home {
+    margin: 0px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.home img {
+    height: 100dvh;
+    width: 60dvw;
+    object-fit: cover;
+}
+
+.home div {
+    flex: auto;
+    text-align: center;
+}
+
+.information {
+    display: flex;
+    justify-content: space-between;
+}
+
+.submition {
+    padding: 2px 16px;
+    line-height: 0.5;
+    vertical-align: middle;
+}
+
+.resubmit {
+    padding: 2px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    align-content: center;
+    justify-content: flex-end;
+    max-width: 500px;
+    gap: 8px;
+}

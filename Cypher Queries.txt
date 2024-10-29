@@ -1,0 +1,87 @@
+// Creating Courses Example
+create (:COURSE {name: "COMP 204", unlocked: true, subject: "Computer Science", type: "Single Term", title: "Computer Programming for Life Sciences", credits:3.0, level:204, available: true, taken: false, gradeAvg: "B+", link: "https://www.mcgill.ca/study/2023-2024/courses/comp-204", note: ""})
+
+// Creating Course General Syntax
+create (:COURSE {name: "[course_Name]", unlocked: [boolean] , subject: "[string]", type: "[string]", title: "[string]", credits: [double], level: [integer], available: [boolean], taken: [boolean], gradeAvg: "[string]", link: "[string]", note: "[string]"})
+
+// Creating Professors
+create (:PROFESSOR {name: "[prof_Name]", rating: [double], link: "[string]"})
+
+// Creating Program
+create (:PROGRAM {name: "[program_Name]", credits: [integer]})
+
+// Creating Faculty
+create (:FACULTY {name: "[faculty_Name]"})
+
+
+
+// Creating Constraint
+CREATE CONSTRAINT FOR (n:COURSE) REQUIRE n.name IS UNIQUE
+
+
+// faculty to program
+match (faculty:FACULTY {name: "[faculty_Name]"}), (prog:PROGRAM {name:"[program_Name]"})
+create (program) -[:OFFERED_PROGRAM]-> (faculty)
+
+// professor to course
+match (course:COURSE {name:"[course_Name]"}), (professor:PROFESSOR {name:"[professor_Name]"})
+create (professor) -[:TEACHES {semester:"[semesters_taught]"}]-> (course)
+
+
+// program to optional course
+match (course:COURSE {name:"[course_Name]"}), (prog:PROGRAM {name:"[program_Name]"})
+create (prog) -[:OPTIONAL_COURSE]-> (course)
+
+// program to required course
+match (course:COURSE {name:"[course_Name]"}), (prog:PROGRAM {name:"[program_Name]"})
+create (prog) -[:REQUIRED_COURSE]-> (course)
+
+// program to complementary course
+match (course:COURSE {name:"[course_Name]"}), (prog:PROGRAM {name:"[program_Name]"})
+create (prog) -[:COMPLEMENTARY_COURSE]-> (course)
+
+
+// coreq relation
+match (origin:COURSE {name:"COMP 361D1"}), (destination:COURSE {name:"COMP 303"})
+create (origin) -[:COREQUISITE {note:""}]-> (destination)
+
+// prereq relation
+match (origin:COURSE {name:"COMP 361D2"}), (destination:COURSE {name:"COMP 361D1"})
+create (origin) -[:PREREQUISITE {note:"No credit will be given unless both COMP 361D1 and COMP 361D2 are taken in consecutive terms"}]-> (destination)
+
+// restrict relation
+match (origin:COURSE {name:"COMP 204"}), (destination:COURSE {name:"COMP 202"})
+create (origin) -[:RESTRICTS {note:""}]-> (destination)
+
+
+// or intermediaries
+match (origin:COURSE{name: "A"})
+create (inter:OR_INTERMEDIARY {taken:false})
+create (origin) -[:PREREQUISITE]-> (inter)
+with inter
+match (prereq:COURSE) where prereq.name in ["B", "C"]
+create (inter) -[:PREREQUISITE]-> (prereq)
+
+// nested and intermediaries
+match (:COURSE{name:"A"}) -[]-> (or_Inter:OR_INTERMEDIARY) -[]-> (:COURSE{name:"D"})
+create (inter:NESTED_AND_INTERMEDIARY {taken: false})
+create (or_Inter) -[:PREREQUISITE]-> (inter)
+with inter
+match (prereq:COURSE) where prereq.name in ["E", "F"]
+create (inter) -[:PREREQUISITE]-> (prereq)
+
+
+// QUERIES TO RUN EACH TIME A NEW SUBJECT IS TAKEN??? WE'RE JUST GONNA DO THIS ENTERNALLY UNLESS YOU WANT A PROGRAM THAT EXECUTES AT A SPEED OF A TURTLE
+match (course:COURSE {name:"COMP 251"})
+match (course) -[:PREREQUISITE]-> (prereq)
+set course.unlocked = all(x in apoc.convert.toList(prereq) where x.taken = true)
+
+match (inter:OR_INTERMEDIARY)
+match (inter) -[:PREREQUISITE]-> (prereq)
+set inter.taken = any(x in apoc.convert.toList(prereq) where x.taken = true)
+
+match (inter:NESTED_AND_INTERMEDIARY)
+match (inter) -[:PREREQUISITE]-> (prereq)
+set inter.taken = all(x in apoc.convert.toList(prereq) where x.taken = true)
+
+

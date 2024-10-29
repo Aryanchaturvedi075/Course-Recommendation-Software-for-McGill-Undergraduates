@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width: device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body class="home">
+    <!--McGill Arts Building Image-->
+    <img src="https://media.cntraveler.com/photos/619bcd86d9ed3a3b53b8bd52/16:9/w_2560,c_limit/McGill%20University_GettyImages-1341263605.jpg" alt="mcgill building" />
+
+    <div>
+        <h1>McGill Course Selection</h1>
+        <hr />
+        <h2>Please Select the Following:</h2>
+        <p>Year, Faculty, Major(s), Minor(s)</p>
+
+        <!--Dropdown meny for year-->
+        <label for="year">Year:</label>
+        <select name="year" id="year">
+            <option value="U0">U0</option>
+            <option value="U1">U1</option>
+            <option value="U2">U2</option>
+            <option value="U3">U3</option>
+        </select>
+
+        <br>
+        <br>
+
+        <!--Dropdown menu for faculty-->
+        <label for="faculty">Faculty:</label>
+        <select name="faculty" id="faculty">
+            <option value="Arts">Arts</option>
+            <option value="Arts & Science">Arts & Science</option>
+            <option value="Engineering">Engineering</option>
+            <option value="Science">Science</option>
+        </select>
+
+        <br>
+        <br>
+
+        <!--Dropdown menu for major(s)-->
+        <label for="major">Major(s):</label>
+        <select name="major" id="major">
+            <option value="Computer Science">Computer Science</option>
+            <option value="Mathematics">Mathematics</option>
+            <option value="Software Engineering">Software Engineering</option>
+        </select>
+
+        <br>
+        <br>
+
+        <!--Dropdown menu for minor(s)-->
+        <label for="minor">Minor(s):</label>
+        <select name="minor" id="minor">
+            <option value="N/A">N/A</option>
+            <option value="Computer Science">Computer Science</option>
+            <option value="Mathematics">Mathematics</option>
+        </select>
+
+        <br>
+        <br>
+
+        <!--Submit button-->
+        <form action="./courses.html">
+            <button type="submit">Submit Selection</button>
+        </form>
+
+        <br>
+        <br>
+    </div>
+</body>
+</html>

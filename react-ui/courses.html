@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width: device-width, initial-scale=1.0">
+    <title>Search</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="information">
+        <!-- Placeholder for submitted information -->
+        <div class="submition">
+            <p> Year: </p>
+            <p> Faculty: </p>
+            <p> Major(s): </p>
+            <p> Minor(s): </p>
+        </div>
+
+        <div class="resubmit"> 
+            <span>
+                <label for="year">Year:</label>
+                <select name="year" id="year">
+                    <option value="U0">U0</option>
+                    <option value="U1">U1</option>
+                    <option value="U2">U2</option>
+                    <option value="U3">U3</option>
+                </select>
+            </span>
+
+            <!--Dropdown menu for faculty-->
+            <span>
+                <label for="faculty">Faculty:</label>
+                <select name="faculty" id="faculty">
+                    <option value="Arts">Arts</option>
+                    <option value="Arts & Science">Arts & Science</option>
+                    <option value="Engineering">Engineering</option>
+                    <option value="Science">Science</option>
+                </select>
+            </span>
+
+            <!--Dropdown menu for major(s)-->
+            <span>
+                <label for="major">Major(s):</label>
+                <select name="major" id="major">
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="Software Engineering">Software Engineering</option>
+                </select>
+            </span>
+
+            <!--Dropdown menu for minor(s)-->
+            <span>
+                <label for="minor">Minor(s):</label>
+                <select name="minor" id="minor">
+                    <option value="N/A">N/A</option>
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Mathematics">Mathematics</option>
+                </select>
+            </span>
+
+            <!--Submit button-->
+            <form action="./courses.html">
+                <button type="submit">Submit Selection</button>
+            </form>
+      </div>
+    </div>
+
+    <!-- Courses appear after here -->
+</body>
+</html>
